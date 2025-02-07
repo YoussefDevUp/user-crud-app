@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const UserForm = ({ onUserAdded }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [age, setAge] = useState('');
   const [phone, setPhone] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.post('http://localhost:5000/api/users', { name, email, age, phone })
       .then(response => {
         onUserAdded(response.data);
-        setName('');
-        setEmail('');
-        setAge('');
-        setPhone('');
+        navigate('/'); // Rediriger vers la page d'accueil
       })
       .catch(error => console.error(error));
   };
