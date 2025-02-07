@@ -1,15 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import UserList from './UserList';
+import { useNavigate } from 'react-router-dom';
+import UserForm from './UserForm';
 
 const HomePage = () => {
+  const navigate = useNavigate();
+
+  const handleUserAdded = () => {
+    navigate('/users'); // Rediriger vers la page UserListPage après l'ajout
+  };
+
   return (
-    <div>
-      <h1>User Management</h1>
-      <Link to="/add-user">
-        <button>Add New User</button>
-      </Link>
-      <UserList />
+    <div className="container">
+      <h1>Add New User</h1>
+      <UserForm onUserAdded={handleUserAdded} />
     </div>
   );
 };

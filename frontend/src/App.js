@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './components/HomePage';
-import AddUserPage from './components/AddUserPage';
+import UserListPage from './components/UserListPage';
+import EditUserPage from './components/EditUserPage';
 import './styles.css';
 
 const App = () => {
@@ -9,7 +10,8 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/add-user" element={<AddUserPage />} />
+        <Route path="/users" element={<UserListPage />} />
+        <Route path="/edit-user/:id" element={<EditUserPage />} />
       </Routes>
     </Router>
   );

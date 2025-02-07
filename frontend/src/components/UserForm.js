@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const UserForm = ({ onUserAdded }) => {
+  // Initialiser les états avec des valeurs par défaut
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [age, setAge] = useState('');
   const [phone, setPhone] = useState('');
-  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5000/api/users', { name, email, age, phone })
+    const userData = { name, email, age, phone };
+    console.log('Données envoyées :', userData); // Afficher les données dans la console
+    axios.post('http://localhost:5000/api/users', userData)
       .then(response => {
         onUserAdded(response.data);
-        navigate('/'); // Rediriger vers la page d'accueil
       })
       .catch(error => console.error(error));
   };

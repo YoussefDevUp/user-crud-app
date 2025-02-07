@@ -16,8 +16,11 @@ exports.getUserById = (req, res) => {
 };
 
 exports.createUser = (req, res) => {
-  const user = req.body;
-  User.create(user, function (err) {
+  const { name, email, age, phone } = req.body;
+  if (!name || !email) {
+    return res.status(400).json({ error: 'Name and email are required' });
+  }
+  User.create({ name, email, age, phone }, function (err) {
     if (err) return res.status(500).json({ error: err.message });
     res.json({ id: this.lastID });
   });
@@ -25,8 +28,11 @@ exports.createUser = (req, res) => {
 
 exports.updateUser = (req, res) => {
   const id = req.params.id;
-  const user = req.body;
-  User.update(id, user, (err) => {
+  const { name, email, age, phone } = req.body;
+  if (!name || !email) {
+    return res.status(400).json({ error: 'Name and email are required' });
+  }
+  User.update(id, { name, email, age, phone }, (err) => {
     if (err) return res.status(500).json({ error: err.message });
     res.json({ message: 'User updated successfully' });
   });
