@@ -89,3 +89,24 @@ li button:hover {
 .edit-button:hover {
   background-color: #e0a800;
 }
+/* Thème clair (par défaut) */
+body {
+  background-color: #f4f4f9;
+  color: #333;
+}
+
+/* Thème sombre */
+body.dark {
+  background-color: #333;
+  color: #fff;
+}
+
+.container.dark {
+  background-color: #444;
+  color: #fff;
+}
+
+button.dark {
+  background-color: #555;
+  color: #fff;
+}
