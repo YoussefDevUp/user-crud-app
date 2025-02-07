@@ -58,7 +58,7 @@ const UserList = () => {
       <ul>
         {users.map(user => (
           <li key={user.id}>
-            {user.name} - {user.email}
+            {user.name} - {user.email} - {user.age} ans - {user.phone}
             <button onClick={() => startEditingUser(user)}>Edit</button>
             <button onClick={() => handleDeleteUser(user.id)}>Delete</button>
           </li>
