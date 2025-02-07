@@ -6,7 +6,7 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   const handleUserAdded = () => {
-    navigate('/users'); // Rediriger vers la page UserListPage après l'ajout
+    navigate('/users');
   };
 
   return (

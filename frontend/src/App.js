@@ -1,30 +1,61 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomePage from './components/HomePage';
-import UserListPage from './components/UserListPage';
-import EditUserPage from './components/EditUserPage';
-import './styles.css';
+"use client"
+
+import { useState, useEffect } from "react"
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
+import HomePage from "./components/HomePage"
+import UserListPage from "./components/UserListPage"
+import EditUserPage from "./components/EditUserPage"
+import "./styles.css"
 
 const App = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(false)
+
+  useEffect(() => {
+    const isDarkMode = localStorage.getItem("darkMode") === "true"
+    setDarkMode(isDarkMode)
+    document.body.classList.toggle("dark-mode", isDarkMode)
+  }, [])
 
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    document.body.classList.toggle('dark');
-  };
+    const newDarkMode = !darkMode
+    setDarkMode(newDarkMode)
+    localStorage.setItem("darkMode", newDarkMode)
+    document.body.classList.toggle("dark-mode", newDarkMode)
+  }
 
   return (
     <Router>
-      <button onClick={toggleDarkMode}>
-        {darkMode ? 'Light Mode' : 'Dark Mode'}
-      </button>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/users" element={<UserListPage />} />
-        <Route path="/edit-user/:id" element={<EditUserPage />} />
-      </Routes>
+      <div className="app">
+        <nav className={darkMode ? "dark-nav" : "light-nav"}>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/users">User List</Link>
+            </li>
+          </ul>
+        </nav>
+        <button className="theme-toggle" onClick={toggleDarkMode}>
+          <span className="icon">{darkMode ? "☀️" : "🌙"}</span>
+          <span className="text">{darkMode ? "Light" : "Dark"}</span>
+        </button>
+        <div className="main-content">
+          <div className="container">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/users" element={<UserListPage />} />
+              <Route path="/edit-user/:id" element={<EditUserPage />} />
+            </Routes>
+          </div>
+        </div>
+        <footer>
+          <p>© 2023 User Management App. All rights reserved.</p>
+        </footer>
+      </div>
     </Router>
-  );
-};
+  )
+}
 
-export default App;
+export default App
+

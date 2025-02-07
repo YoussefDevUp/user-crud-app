@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import EditUserForm from './EditUserForm';
 
 const EditUserPage = () => {
-  const { id } = useParams(); // Récupérer l'ID de l'utilisateur depuis l'URL
+  const { id } = useParams();
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
@@ -15,11 +15,11 @@ const EditUserPage = () => {
   }, [id]);
 
   const handleUserUpdated = (updatedUser) => {
-    navigate('/users'); // Rediriger vers UserListPage après la mise à jour
+    navigate('/users');
   };
 
   if (!user) {
-    return <div>Loading...</div>; // Afficher un message de chargement
+    return <div>Loading...</div>;
   }
 
   return (

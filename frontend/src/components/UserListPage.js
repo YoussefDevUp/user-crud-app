@@ -6,7 +6,7 @@ import UserItem from './UserItem';
 const UserListPage = () => {
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [usersPerPage] = useState(10); // Nombre d'utilisateurs par page
+  const [usersPerPage] = useState(10);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,7 +27,6 @@ const UserListPage = () => {
       .catch(error => console.error(error));
   };
 
-  // Pagination
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
@@ -37,7 +36,9 @@ const UserListPage = () => {
   return (
     <div className="container">
       <h1>User List</h1>
-      <button onClick={() => navigate('/')}>Add New User</button>
+      <button className="add-user-button" onClick={() => navigate('/')}>
+        Add New User
+      </button>
       <ul>
         {currentUsers.map(user => (
           <UserItem
@@ -48,9 +49,13 @@ const UserListPage = () => {
           />
         ))}
       </ul>
-      <div>
+      <div className="pagination">
         {Array.from({ length: Math.ceil(users.length / usersPerPage) }, (_, i) => (
-          <button key={i + 1} onClick={() => paginate(i + 1)}>
+          <button
+            key={i + 1}
+            onClick={() => paginate(i + 1)}
+            className={currentPage === i + 1 ? 'active' : ''}
+          >
             {i + 1}
           </button>
         ))}
