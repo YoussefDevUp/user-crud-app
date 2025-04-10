@@ -39,8 +39,7 @@ jobs:
 
     - name: Setup Database
       run: |
-        mysql -h 127.0.0.1 -u root -ppassword usersdb 
-        < ./backend/db/schema.sql
+        mysql -h 127.0.0.1 -u root -ppassword usersdb < ./backend/db/schema.sql
 
     - name: Run Backend Tests
       working-directory: ./backend
