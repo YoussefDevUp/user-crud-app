@@ -5,3 +5,4 @@
 To run the tests locally:
 ```bash
 npm test
+```
