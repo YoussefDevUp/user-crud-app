@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react"
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import HomePage from "./components/HomePage"
 import UserListPage from "./components/UserListPage"
 import EditUserPage from "./components/EditUserPage"
@@ -49,6 +51,7 @@ const App = () => {
             </Routes>
           </div>
         </div>
+        <ToastContainer position="top-right" />
         <footer>
           <p>© 2023 User Management App. All rights reserved.</p>
         </footer>

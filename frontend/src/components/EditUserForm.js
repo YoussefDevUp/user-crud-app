@@ -10,11 +10,25 @@ const EditUserForm = ({ user, onUserUpdated }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:5000/api/users/${user.id}`, { name, email, age, phone })
+    console.log('Sending update request for user:', user.id); // Debug log
+
+    axios.put(`http://localhost:5000/api/users/${user.id}`, { 
+      name, 
+      email, 
+      age: parseInt(age), 
+      phone 
+    })
       .then(response => {
+        console.log('Update successful:', response.data);
+        // Force a refresh of the parent component
         onUserUpdated(response.data);
+        // Add alert for visual feedback
+        alert('User updated successfully!');
       })
-      .catch(error => console.error(error));
+      .catch(error => {
+        console.error('Update failed:', error.response?.data || error.message);
+        alert('Failed to update user. Please try again.');
+      });
   };
 
   return (
